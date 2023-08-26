@@ -7,6 +7,8 @@ import {
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
+import { MarkdownPlugin } from './plugins/markdown';
+import { HeadingNode } from '@lexical/rich-text';
 
 function onChange(editorState: EditorState) {
   editorState.read(() => {
@@ -22,7 +24,17 @@ export const MyEditor = () => {
   const initialConfig: InitialConfigType = {
     namespace: 'MyEditor',
     // エディタ内の要素にstyleを当てるときにつかう
-    theme: {},
+    theme: {
+      heading: {
+        h1: 'text-5xl font-bold',
+        h2: 'text-4xl font-bold',
+        h3: 'text-3xl font-bold',
+        h4: 'text-2xl font-bold',
+      },
+    },
+    nodes: [
+      HeadingNode,
+    ],
     onError: (error) => console.error(error),
   };
 
@@ -45,6 +57,8 @@ export const MyEditor = () => {
       </div>
       {/* 入力したときに発火するプラグイン */}
       <OnChangePlugin onChange={onChange} />
+      {/* markdownを使えるようにするプラグイン */}
+      <MarkdownPlugin />
     </LexicalComposer>
   );
 };
