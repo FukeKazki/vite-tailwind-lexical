@@ -7,6 +7,9 @@ import {
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
+import BannerPlugin from './plugins/banner/banner-plugin';
+import { BannerNode } from './plugins/banner/banner-node';
+import { BannerButton } from './plugins/banner/banner-button';
 
 function onChange(editorState: EditorState) {
   editorState.read(() => {
@@ -23,12 +26,16 @@ export const MyEditor = () => {
     namespace: 'MyEditor',
     // エディタ内の要素にstyleを当てるときにつかう
     theme: {},
+    nodes: [BannerNode],
     onError: (error) => console.error(error),
   };
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <div className="rounded border p-4 shadow-sm relative">
+        <div className='grid grid-flow-col auto-cols-min'>
+          <BannerButton />
+        </div>
         <RichTextPlugin
           // 入力する要素 textarea要素 みたいなもの
           contentEditable={
@@ -36,7 +43,7 @@ export const MyEditor = () => {
           }
           // 入力前に表示されている
           placeholder={
-            <div className="pointer-events-none absolute top-4 select-none text-slate-300">
+            <div className="pointer-events-none absolute top-10 select-none text-slate-300">
               今なにしてる?
             </div>
           }
@@ -45,6 +52,7 @@ export const MyEditor = () => {
       </div>
       {/* 入力したときに発火するプラグイン */}
       <OnChangePlugin onChange={onChange} />
+      <BannerPlugin />
     </LexicalComposer>
   );
 };
