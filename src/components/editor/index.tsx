@@ -12,6 +12,9 @@ import { HeadingNode } from '@lexical/rich-text';
 import BannerPlugin from './plugins/banner/banner-plugin';
 import { BannerNode } from './plugins/banner/banner-node';
 import { BannerButton } from './plugins/banner/banner-button';
+import YouTubePlugin from './plugins/youtube/youtube-plugin';
+import { YouTubeNode } from './plugins/youtube/youtube-node';
+import { YoutubeButton } from './plugins/youtube/youtube-button';
 
 function onChange(editorState: EditorState) {
   editorState.read(() => {
@@ -37,7 +40,8 @@ export const MyEditor = () => {
     },
     nodes: [
       HeadingNode,
-      BannerNode
+      BannerNode,
+      YouTubeNode
     ],
     onError: (error) => console.error(error),
   };
@@ -45,8 +49,9 @@ export const MyEditor = () => {
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <div className="rounded border p-4 shadow-sm relative">
-        <div className='grid grid-flow-col auto-cols-min'>
+        <div className='grid grid-flow-col auto-cols-min gap-2'>
           <BannerButton />
+          <YoutubeButton />
         </div>
         <RichTextPlugin
           // 入力する要素 textarea要素 みたいなもの
@@ -67,6 +72,7 @@ export const MyEditor = () => {
       {/* markdownを使えるようにするプラグイン */}
       <MarkdownPlugin />
       <BannerPlugin />
+      <YouTubePlugin />
     </LexicalComposer>
   );
 };
