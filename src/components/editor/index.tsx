@@ -9,6 +9,9 @@ import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { MarkdownPlugin } from './plugins/markdown';
 import { HeadingNode } from '@lexical/rich-text';
+import BannerPlugin from './plugins/banner/banner-plugin';
+import { BannerNode } from './plugins/banner/banner-node';
+import { BannerButton } from './plugins/banner/banner-button';
 
 function onChange(editorState: EditorState) {
   editorState.read(() => {
@@ -34,6 +37,7 @@ export const MyEditor = () => {
     },
     nodes: [
       HeadingNode,
+      BannerNode
     ],
     onError: (error) => console.error(error),
   };
@@ -41,6 +45,9 @@ export const MyEditor = () => {
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <div className="rounded border p-4 shadow-sm relative">
+        <div className='grid grid-flow-col auto-cols-min'>
+          <BannerButton />
+        </div>
         <RichTextPlugin
           // 入力する要素 textarea要素 みたいなもの
           contentEditable={
@@ -48,7 +55,7 @@ export const MyEditor = () => {
           }
           // 入力前に表示されている
           placeholder={
-            <div className="pointer-events-none absolute top-4 select-none text-slate-300">
+            <div className="pointer-events-none absolute top-10 select-none text-slate-300">
               今なにしてる?
             </div>
           }
@@ -59,6 +66,7 @@ export const MyEditor = () => {
       <OnChangePlugin onChange={onChange} />
       {/* markdownを使えるようにするプラグイン */}
       <MarkdownPlugin />
+      <BannerPlugin />
     </LexicalComposer>
   );
 };
