@@ -3,6 +3,7 @@
 # Lexical
 
 - https://github.com/facebook/lexical
+- https://lexical.dev/
 
 # Setup
 
