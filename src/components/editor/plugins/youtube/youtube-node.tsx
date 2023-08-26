@@ -7,13 +7,13 @@ import type {
   LexicalNode,
   NodeKey,
   Spread,
-} from 'lexical';
+} from "lexical";
 
-import { BlockWithAlignableContents } from '@lexical/react/LexicalBlockWithAlignableContents';
+import { BlockWithAlignableContents } from "@lexical/react/LexicalBlockWithAlignableContents";
 import {
   DecoratorBlockNode,
   SerializedDecoratorBlockNode,
-} from '@lexical/react/LexicalDecoratorBlockNode';
+} from "@lexical/react/LexicalDecoratorBlockNode";
 
 type YouTubeComponentProps = Readonly<{
   className: Readonly<{
@@ -47,12 +47,12 @@ const YouTubeComponent = ({
       />
     </BlockWithAlignableContents>
   );
-}
+};
 
 export type SerializedYouTubeNode = Spread<
   {
     videoID: string;
-    type: 'youtube';
+    type: "youtube";
     version: 1;
   },
   SerializedDecoratorBlockNode
@@ -64,7 +64,7 @@ export class YouTubeNode extends DecoratorBlockNode {
   __id: string;
 
   static override getType(): string {
-    return 'youtube';
+    return "youtube";
   }
 
   static override clone(node: YouTubeNode): YouTubeNode {
@@ -85,7 +85,7 @@ export class YouTubeNode extends DecoratorBlockNode {
   override exportJSON(): SerializedYouTubeNode {
     return {
       ...super.exportJSON(),
-      type: 'youtube',
+      type: "youtube",
       version: 1,
       videoID: this.__id,
     };
@@ -97,7 +97,7 @@ export class YouTubeNode extends DecoratorBlockNode {
       iframe: () => {
         return {
           conversion: (element: HTMLElement) => {
-            const videoId = element.getAttribute('data-youtube-id');
+            const videoId = element.getAttribute("data-youtube-id");
             if (!videoId) return null;
             const node = $createYouTubeNode(videoId);
             return {
@@ -112,18 +112,18 @@ export class YouTubeNode extends DecoratorBlockNode {
 
   // YouTubeNode を DOM に変換する
   override exportDOM(): DOMExportOutput {
-    const element: HTMLDivElement = document.createElement('iframe');
+    const element: HTMLDivElement = document.createElement("iframe");
 
-    element.setAttribute('data-youtube-id', this.__id);
-    element.setAttribute('src', `https://www.youtube.com/embed/${this.__id}`);
+    element.setAttribute("data-youtube-id", this.__id);
+    element.setAttribute("src", `https://www.youtube.com/embed/${this.__id}`);
     element.setAttribute(
-      'allow',
-      'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
+      "allow",
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
     );
-    element.setAttribute('allowFullScreen', 'true');
-    element.setAttribute('title', 'YouTube video');
-    element.setAttribute('width', '320');
-    element.setAttribute('height', '220');
+    element.setAttribute("allowFullScreen", "true");
+    element.setAttribute("title", "YouTube video");
+    element.setAttribute("width", "320");
+    element.setAttribute("height", "220");
 
     return {
       element,
@@ -154,8 +154,8 @@ export class YouTubeNode extends DecoratorBlockNode {
   override decorate(_editor: LexicalEditor, config: EditorConfig): JSX.Element {
     const embedBlockTheme = config.theme.embedBlock || {};
     const className = {
-      base: embedBlockTheme.base || '',
-      focus: embedBlockTheme.focus || '',
+      base: embedBlockTheme.base || "",
+      focus: embedBlockTheme.focus || "",
     };
     return (
       <YouTubeComponent

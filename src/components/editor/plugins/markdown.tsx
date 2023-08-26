@@ -1,5 +1,5 @@
-import { HEADING } from '@lexical/markdown';
-import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
+import { HEADING } from "@lexical/markdown";
+import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
 
 export const MarkdownPlugin = () => {
   // このプラグインは、Markdownのショートカットを使えるようにするプラグイン

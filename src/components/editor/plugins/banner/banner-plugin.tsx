@@ -1,17 +1,17 @@
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import {
   $getSelection,
   $isRangeSelection,
   COMMAND_PRIORITY_EDITOR,
   createCommand,
   LexicalCommand,
-} from 'lexical';
-import { $setBlocksType } from '@lexical/selection'
-import { useEffect } from 'react';
-import { $createBannerNode, BannerNode } from './banner-node';
+} from "lexical";
+import { $setBlocksType } from "@lexical/selection";
+import { useEffect } from "react";
+import { $createBannerNode, BannerNode } from "./banner-node";
 
 export const INSERT_BANNER_COMMAND: LexicalCommand<string> = createCommand(
-  'INSERT_BANNER_COMMAND',
+  "INSERT_BANNER_COMMAND",
 );
 
 export default function BannerPlugin(): JSX.Element | null {
@@ -19,7 +19,7 @@ export default function BannerPlugin(): JSX.Element | null {
 
   useEffect(() => {
     if (!editor.hasNodes([BannerNode])) {
-      throw new Error('BannerPlugin: BannerNode not registered on editor');
+      throw new Error("BannerPlugin: BannerNode not registered on editor");
     }
 
     return editor.registerCommand<string>(

@@ -1,8 +1,15 @@
-import { $createParagraphNode, EditorConfig, ElementNode, LexicalNode, NodeKey, RangeSelection } from "lexical";
+import {
+  $createParagraphNode,
+  EditorConfig,
+  ElementNode,
+  LexicalNode,
+  NodeKey,
+  RangeSelection,
+} from "lexical";
 
 export class BannerNode extends ElementNode {
   static override getType(): string {
-    return 'banner';
+    return "banner";
   }
   constructor(key?: NodeKey) {
     super(key);
@@ -12,18 +19,26 @@ export class BannerNode extends ElementNode {
     return new BannerNode(node.key);
   }
 
-  updateDOM(_prevNode: unknown, _dom: HTMLElement, _config: EditorConfig): boolean {
+  updateDOM(
+    _prevNode: unknown,
+    _dom: HTMLElement,
+    _config: EditorConfig,
+  ): boolean {
     return false;
   }
 
   override createDOM() {
     const dom = document.createElement("div");
-    dom.className = "banner bg-green-800 bg-opacity-70 border-l-8 border-green-800 text-white p-3 m-2";
+    dom.className =
+      "banner bg-green-800 bg-opacity-70 border-l-8 border-green-800 text-white p-3 m-2";
     return dom;
   }
 
   // 改行する
-  override insertNewAfter(_selection: RangeSelection, restoreSelection?: boolean | undefined): LexicalNode | null {
+  override insertNewAfter(
+    _selection: RangeSelection,
+    restoreSelection?: boolean | undefined,
+  ): LexicalNode | null {
     const newBlock = $createParagraphNode();
     const direction = this.getDirection();
     newBlock.setDirection(direction);
@@ -44,4 +59,3 @@ export class BannerNode extends ElementNode {
 }
 
 export const $createBannerNode = () => new BannerNode();
-

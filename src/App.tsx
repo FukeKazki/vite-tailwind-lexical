@@ -1,4 +1,4 @@
-import { MyEditor } from './components/editor';
+import { MyEditor } from "./components/editor";
 
 function App() {
   return (

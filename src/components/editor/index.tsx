@@ -1,20 +1,20 @@
-import { $getRoot, $getSelection, EditorState } from 'lexical';
-import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
+import { $getRoot, $getSelection, EditorState } from "lexical";
+import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import {
   InitialConfigType,
   LexicalComposer,
-} from '@lexical/react/LexicalComposer';
-import { ContentEditable } from '@lexical/react/LexicalContentEditable';
-import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
-import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
-import { MarkdownPlugin } from './plugins/markdown';
-import { HeadingNode } from '@lexical/rich-text';
-import BannerPlugin from './plugins/banner/banner-plugin';
-import { BannerNode } from './plugins/banner/banner-node';
-import { BannerButton } from './plugins/banner/banner-button';
-import YouTubePlugin from './plugins/youtube/youtube-plugin';
-import { YouTubeNode } from './plugins/youtube/youtube-node';
-import { YoutubeButton } from './plugins/youtube/youtube-button';
+} from "@lexical/react/LexicalComposer";
+import { ContentEditable } from "@lexical/react/LexicalContentEditable";
+import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
+import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
+import { MarkdownPlugin } from "./plugins/markdown";
+import { HeadingNode } from "@lexical/rich-text";
+import BannerPlugin from "./plugins/banner/banner-plugin";
+import { BannerNode } from "./plugins/banner/banner-node";
+import { BannerButton } from "./plugins/banner/banner-button";
+import YouTubePlugin from "./plugins/youtube/youtube-plugin";
+import { YouTubeNode } from "./plugins/youtube/youtube-node";
+import { YoutubeButton } from "./plugins/youtube/youtube-button";
 
 function onChange(editorState: EditorState) {
   editorState.read(() => {
@@ -28,28 +28,24 @@ function onChange(editorState: EditorState) {
 export const MyEditor = () => {
   // このエディターの設定
   const initialConfig: InitialConfigType = {
-    namespace: 'MyEditor',
+    namespace: "MyEditor",
     // エディタ内の要素にstyleを当てるときにつかう
     theme: {
       heading: {
-        h1: 'text-5xl font-bold',
-        h2: 'text-4xl font-bold',
-        h3: 'text-3xl font-bold',
-        h4: 'text-2xl font-bold',
+        h1: "text-5xl font-bold",
+        h2: "text-4xl font-bold",
+        h3: "text-3xl font-bold",
+        h4: "text-2xl font-bold",
       },
     },
-    nodes: [
-      HeadingNode,
-      BannerNode,
-      YouTubeNode
-    ],
+    nodes: [HeadingNode, BannerNode, YouTubeNode],
     onError: (error) => console.error(error),
   };
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <div className="rounded border p-4 shadow-sm relative">
-        <div className='grid grid-flow-col auto-cols-min gap-2'>
+        <div className="grid grid-flow-col auto-cols-min gap-2">
           <BannerButton />
           <YoutubeButton />
         </div>
