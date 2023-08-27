@@ -1,4 +1,7 @@
 import { $getRoot, $getSelection, EditorState } from "lexical";
+import { CodeHighlightNode, CodeNode } from "@lexical/code";
+import { LinkNode } from "@lexical/link";
+import { ListItemNode, ListNode } from "@lexical/list";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import {
   InitialConfigType,
@@ -8,19 +11,13 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { MarkdownPlugin } from "./plugins/markdown";
-import { HeadingNode } from "@lexical/rich-text";
+import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import BannerPlugin from "./plugins/banner/banner-plugin";
 import { BannerNode } from "./plugins/banner/banner-node";
 import { BannerButton } from "./plugins/banner/banner-button";
 import YouTubePlugin from "./plugins/youtube/youtube-plugin";
 import { YouTubeNode } from "./plugins/youtube/youtube-node";
 import { YoutubeButton } from "./plugins/youtube/youtube-button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
 
 function onChange(editorState: EditorState) {
   editorState.read(() => {
@@ -43,8 +40,30 @@ export const MyEditor = () => {
         h3: "text-3xl font-bold",
         h4: "text-2xl font-bold",
       },
+      paragraph: "text-body",
+      quote: "text-sm italic text-slate-500 border-l-4 border-slate-500 pl-2",
+      list: {
+        ul: "list-disc list-inside",
+        ol: "list-decimal list-inside",
+      },
+      text: {
+        bold: "font-bold",
+        italic: "italic",
+      },
     },
-    nodes: [HeadingNode, BannerNode, YouTubeNode],
+    nodes: [
+      // -- markdown node
+      HeadingNode,
+      QuoteNode,
+      ListNode,
+      ListItemNode,
+      LinkNode,
+      CodeNode,
+      CodeHighlightNode,
+      // -- custom node
+      BannerNode,
+      YouTubeNode,
+    ],
     onError: (error) => console.error(error),
   };
 
@@ -62,7 +81,7 @@ export const MyEditor = () => {
           }
           // 入力前に表示されている
           placeholder={
-            <div className="pointer-events-none absolute top-10 select-none text-slate-300">
+            <div className="pointer-events-none absolute top-9 select-none text-slate-300">
               今なにしてる?
             </div>
           }
