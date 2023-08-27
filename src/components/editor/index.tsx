@@ -15,6 +15,12 @@ import { BannerButton } from "./plugins/banner/banner-button";
 import YouTubePlugin from "./plugins/youtube/youtube-plugin";
 import { YouTubeNode } from "./plugins/youtube/youtube-node";
 import { YoutubeButton } from "./plugins/youtube/youtube-button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 
 function onChange(editorState: EditorState) {
   editorState.read(() => {
