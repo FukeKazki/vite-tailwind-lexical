@@ -18,6 +18,8 @@ import { BannerButton } from "./plugins/banner/banner-button";
 import YouTubePlugin from "./plugins/youtube/youtube-plugin";
 import { YouTubeNode } from "./plugins/youtube/youtube-node";
 import { YoutubeButton } from "./plugins/youtube/youtube-button";
+import { EmoticonNode } from "./plugins/emoticon/emoticon-node";
+import EmoticonPlugin from "./plugins/emoticon/emoticon-plugin";
 
 function onChange(editorState: EditorState) {
   editorState.read(() => {
@@ -63,6 +65,7 @@ export const MyEditor = () => {
       // -- custom node
       BannerNode,
       YouTubeNode,
+      EmoticonNode,
     ],
     onError: (error) => console.error(error),
   };
@@ -94,6 +97,7 @@ export const MyEditor = () => {
       <MarkdownPlugin />
       <BannerPlugin />
       <YouTubePlugin />
+      <EmoticonPlugin />
     </LexicalComposer>
   );
 };
